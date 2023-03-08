@@ -76,6 +76,8 @@ public static partial class SmartLoggerExtensions
 }
 ```
 
+This works because of the overload resolution - C# compiler chooses a generic overload over a non-generic one.
+
 The standard [LoggerExtensions](https://github.com/dotnet/runtime/blob/main/src/libraries/Microsoft.Extensions.Logging.Abstractions/src/LoggerExtensions.cs) has 4 overloads for every `Log()`, `LogCritical()`, `LogDebug()`, `LogInformation()`, `LogTrace()`, `LogWarning()` methods so if we want similar signatures with 10 generic arguments that is 6 * 4 * 10 = 240 new methods. Test this amount of code is only viable with reflection which is what I've done.
 
 Now, let's see the difference:
