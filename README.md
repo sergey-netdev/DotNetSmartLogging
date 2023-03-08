@@ -8,8 +8,9 @@ Microsoft introduced [ILogger](https://learn.microsoft.com/en-us/dotnet/api/micr
 ```csharp
     logger.LogInformation("Parsing first {batch} rows of total {totalRows}...", batchSize, input.RecordCount);
 	
-	logger.LogDebug("Error calling the gateway for {userId}. The response was: {response}.", user.Id, ToJson(response));
+    logger.LogDebug("Error calling the gateway for {userId}. The response was: {response}.", user.Id, ToJson(response));
 ```
+
 In heavy loaded applications though, you usually have logging level set to WARN or ERR so everything lower is not logged but it's still executing.
 There is also a serious problem with `ILogger` - all its logging methods accept `params object?[] args` which means boxing when you pass structs into them.
 
@@ -18,12 +19,11 @@ So, we have two problems here:
  2. Unnecessary boxing
 
 The usual solution is:
-
 ```
     if (logger.IsEnabled(LogLevel.Information))
-	{
+    {
         logger.LogInformation("Parsing first {batch} rows of total {totalRows}...", batchSize, input.RecordCount);
-	}
+    }
 ```
 
 but it's very unhandy as we waste 3 extra lines for every log call. Can we do better?
