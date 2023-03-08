@@ -19,7 +19,7 @@ So, we have two problems here:
  2. Unnecessary boxing
 
 The usual solution is:
-```
+```csharp
     if (logger.IsEnabled(LogLevel.Information))
     {
         logger.LogInformation("Parsing first {batch} rows of total {totalRows}...", batchSize, input.RecordCount);
