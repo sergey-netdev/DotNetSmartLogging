@@ -38,7 +38,7 @@ void Write<T0, T1, T2>(LogEventLevel level, string messageTemplate, T0 propertyV
 
 in addition to a usual `params object?[] args` overload.
 
-[NLog](https://nlog-project.org/) library has a similar approach, see the [source] (https://github.com/NLog/NLog/blob/dev/src/NLog/Abstractions/ILogger.cs).
+[NLog](https://nlog-project.org/) library has a similar approach, see the [source](https://github.com/NLog/NLog/blob/dev/src/NLog/Abstractions/ILogger.cs).
 
 Those are superb libraries (and you should use them!) but you can see the problem here - you don't want a dependency on their `ILogger` abstraction, especially in your shared libraries. Remember that versioning hell with [log4net](https://logging.apache.org/log4net/) when it was popular? The diamond problem is no joke. Plus, the overloads in both [Serilog](https://serilog.net/) and [NLog](https://nlog-project.org/) are limited to 3 generic parameters. There is a good reason for this but sometimes you just don't care.
 
